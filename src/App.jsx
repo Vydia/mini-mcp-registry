@@ -8,11 +8,9 @@ export default function App() {
   const [activePreset, setActivePreset] = useState(PRESETS[0]);
   const [customQuery, setCustomQuery] = useState('');
 
-  const keywords = customQuery.trim()
-    ? customQuery.split(',').map((k) => k.trim()).filter(Boolean)
-    : activePreset.keywords;
+  const search = customQuery.trim() || activePreset.search;
 
-  const { servers, total, loading, error, refetch } = useRegistry(keywords);
+  const { servers, loading, error, refetch } = useRegistry(search);
 
   return (
     <div className="app">
@@ -53,20 +51,20 @@ export default function App() {
           <div className="custom-filter">
             <input
               type="text"
-              placeholder="Custom keywords (comma-separated)…"
+              placeholder="Custom search…"
               value={customQuery}
               onChange={(e) => setCustomQuery(e.target.value)}
             />
           </div>
 
           <p className="filter-description">
-            {customQuery.trim() ? `Filtering by: ${keywords.join(', ')}` : activePreset.description}
+            {customQuery.trim() ? `Searching for: "${customQuery.trim()}"` : activePreset.description}
           </p>
         </section>
 
         {loading && (
           <div className="status">
-            <span className="spinner" /> Fetching all {total > 0 ? `(${total} loaded so far…)` : 'servers…'}
+            <span className="spinner" /> Searching registry…
           </div>
         )}
 
@@ -79,7 +77,6 @@ export default function App() {
         {!loading && !error && (
           <div className="results-header">
             <span>{servers.length} server{servers.length !== 1 ? 's' : ''} found</span>
-            {total > 0 && <span className="muted">out of {total} total</span>}
           </div>
         )}
 

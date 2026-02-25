@@ -1,0 +1,246 @@
+{
+  "servers": [
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+        "name": "ai.waystation/postgres",
+        "description": "Connect to your PostgreSQL database to query data and schemas.",
+        "repository": {
+          "url": "https://github.com/waystation-ai/mcp",
+          "source": "github"
+        },
+        "version": "0.3.1",
+        "remotes": [
+          {
+            "type": "streamable-http",
+            "url": "https://waystation.ai/postgres/mcp"
+          },
+          {
+            "type": "sse",
+            "url": "https://waystation.ai/postgres/mcp/sse"
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2025-09-09T14:46:09.489652Z",
+          "updatedAt": "2025-09-09T14:46:09.489652Z",
+          "isLatest": true
+        }
+      }
+    },
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+        "name": "capital.hove/read-only-local-postgres-mcp-server",
+        "description": "MCP server for read-only PostgreSQL database queries in Claude Desktop",
+        "repository": {
+          "url": "https://github.com/hovecapital/read-only-local-postgres-mcp-server",
+          "source": "github"
+        },
+        "version": "0.1.0",
+        "websiteUrl": "https://hove.capital",
+        "packages": [
+          {
+            "registryType": "npm",
+            "registryBaseUrl": "https://registry.npmjs.org",
+            "identifier": "@hovecapital/read-only-postgres-mcp-server",
+            "version": "0.1.0",
+            "transport": {
+              "type": "stdio"
+            }
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2026-01-29T08:50:16.035232Z",
+          "updatedAt": "2026-01-29T08:50:16.035232Z",
+          "isLatest": true
+        }
+      }
+    },
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+        "name": "io.github.marcelo-ochoa/postgres",
+        "description": "MCP server for interacting with PostgreSQL databases",
+        "repository": {
+          "url": "https://github.com/marcelo-ochoa/servers",
+          "source": "github",
+          "subfolder": "src/postgres"
+        },
+        "version": "1.0.6",
+        "packages": [
+          {
+            "registryType": "npm",
+            "identifier": "@marcelo-ochoa/server-postgres",
+            "version": "1.0.6",
+            "transport": {
+              "type": "stdio"
+            },
+            "packageArguments": [
+              {
+                "description": "PostgreSQL connection string",
+                "type": "positional",
+                "valueHint": "connectionString"
+              }
+            ],
+            "environmentVariables": [
+              {
+                "description": "PostgreSQL user",
+                "format": "string",
+                "name": "POSTGRES_USER"
+              },
+              {
+                "description": "PostgreSQL password",
+                "format": "string",
+                "isSecret": true,
+                "name": "POSTGRES_PASSWORD"
+              }
+            ]
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2026-02-10T20:14:50.5282Z",
+          "updatedAt": "2026-02-10T20:14:50.5282Z",
+          "isLatest": true
+        }
+      }
+    },
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+        "name": "io.github.martymarkenson/postgres-connector",
+        "description": "MCP server for querying PostgreSQL databases",
+        "repository": {},
+        "version": "1.0.2",
+        "packages": [
+          {
+            "registryType": "npm",
+            "identifier": "postgres-connector",
+            "version": "1.0.2",
+            "transport": {
+              "type": "stdio"
+            }
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2025-09-25T21:59:51.445715Z",
+          "updatedAt": "2025-09-25T21:59:51.445715Z",
+          "isLatest": true
+        }
+      }
+    },
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+        "name": "io.github.neverinfamous/postgres-mcp",
+        "description": "PostgreSQL MCP server with 203 tools, connection pooling, HTTP/SSE, OAuth 2.1, and tool filtering",
+        "title": "PostgreSQL MCP Server",
+        "repository": {
+          "url": "https://github.com/neverinfamous/postgresql-mcp.git",
+          "source": "github"
+        },
+        "version": "1.0.2",
+        "packages": [
+          {
+            "registryType": "npm",
+            "identifier": "@neverinfamous/postgres-mcp",
+            "version": "1.0.2",
+            "transport": {
+              "type": "stdio"
+            }
+          },
+          {
+            "registryType": "oci",
+            "identifier": "docker.io/writenotenow/postgres-mcp:v1.0.2",
+            "transport": {
+              "type": "stdio"
+            }
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2026-01-25T06:06:08.049883Z",
+          "updatedAt": "2026-01-25T06:06:08.049883Z",
+          "isLatest": true
+        }
+      }
+    },
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+        "name": "io.github.neverinfamous/postgres-mcp-server",
+        "description": "Enterprise PostgreSQL MCP server with 63 tools, 10 resources, 10 prompts for AI-native operations",
+        "title": "PostgreSQL MCP Server",
+        "repository": {
+          "url": "https://github.com/neverinfamous/postgres-mcp.git",
+          "source": "github"
+        },
+        "version": "1.2.0",
+        "packages": [
+          {
+            "registryType": "oci",
+            "identifier": "docker.io/writenotenow/postgres-mcp-enhanced:v1.2.0",
+            "transport": {
+              "type": "stdio"
+            }
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2025-12-09T00:22:40.072526Z",
+          "updatedAt": "2025-12-09T00:22:40.072526Z",
+          "isLatest": true
+        }
+      }
+    },
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+        "name": "io.github.pgEdge/postgres-mcp",
+        "description": "Enterprise PostgreSQL MCP server with NL queries, hybrid search (pgvector+BM25), and web UI",
+        "repository": {
+          "url": "https://github.com/pgEdge/pgedge-postgres-mcp",
+          "source": "github"
+        },
+        "version": "1.0.0",
+        "packages": [
+          {
+            "registryType": "oci",
+            "identifier": "ghcr.io/pgedge/postgres-mcp:latest",
+            "transport": {
+              "type": "stdio"
+            }
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2026-01-16T12:51:08.657796Z",
+          "updatedAt": "2026-01-16T12:51:08.657796Z",
+          "isLatest": true
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "count": 7,
+    "filter": "postgres",
+    "generatedAt": "2026-02-25T18:41:07.769Z"
+  }
+}
