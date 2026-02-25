@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/build-registry.mjs && vite build",
+    "add-server": "node scripts/add-server.mjs",
+    "remove-server": "node scripts/remove-server.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
