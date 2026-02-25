@@ -16,7 +16,7 @@ const OUT_DIR = join(__dirname, '..', 'public');
 
 // Add server names here to include them
 const ALLOWED_SERVERS = [
-  'com.figma.mcp/mcp',
+
 ];
 
 async function fetchServer(name) {
