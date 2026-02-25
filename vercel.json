@@ -1,6 +1,11 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/v0.1/servers", "destination": "/v0.1/servers.json" },
+    { "source": "/v0.1/:name/versions/latest", "destination": "/v0.1/:name/versions/latest.json" },
+    { "source": "/v0.1/:org/:name/versions/latest", "destination": "/v0.1/:org/:name/versions/latest.json" }
+  ],
   "headers": [
     {
       "source": "/(.*\\.json)",
