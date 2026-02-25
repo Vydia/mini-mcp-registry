@@ -3,12 +3,12 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/v0.1/servers", "destination": "/v0.1/servers.json" },
-    { "source": "/v0.1/:name/versions/latest", "destination": "/v0.1/:name/versions/latest.json" },
-    { "source": "/v0.1/:org/:name/versions/latest", "destination": "/v0.1/:org/:name/versions/latest.json" }
+    { "source": "/v0.1/servers/:serverName/versions/:version", "destination": "/v0.1/:serverName/versions/:version.json" },
+    { "source": "/v0.1/servers/:org/:name/versions/:version", "destination": "/v0.1/:org/:name/versions/:version.json" }
   ],
   "headers": [
     {
-      "source": "/(.*\\.json)",
+      "source": "/v0.1/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
