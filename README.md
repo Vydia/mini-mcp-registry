@@ -8,8 +8,6 @@ A lightweight, self-hosted MCP registry proxy that exposes a curated subset of t
 https://mini-mcp-registry.vercel.app
 ```
 
-Set this as `chat.mcp.gallery.serviceUrl` in VS Code settings to use this registry as your MCP server gallery.
-
 ## Managing servers
 
 **Add a server** using its name from the [official registry](https://registry.modelcontextprotocol.io):
