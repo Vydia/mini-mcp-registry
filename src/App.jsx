@@ -1,24 +1,31 @@
-import { useState } from 'react';
-import { useRegistry } from './hooks/useRegistry';
+import { useState, useEffect } from 'react';
 import { ServerCard } from './components/ServerCard';
-import { PRESETS } from './presets';
 import './App.css';
 
 export default function App() {
-  const [activePreset, setActivePreset] = useState(PRESETS[0]);
-  const [customQuery, setCustomQuery] = useState('');
+  const [servers, setServers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const search = customQuery.trim() || activePreset.search;
+  const load = () => {
+    setLoading(true);
+    setError(null);
+    fetch('./allowed-servers')
+      .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then((d) => setServers(d.servers ?? []))
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  };
 
-  const { servers, loading, error, refetch } = useRegistry(search);
+  useEffect(() => { load(); }, []);
 
   return (
     <div className="app">
       <header className="app-header">
         <div className="header-content">
           <div>
-            <h1>MCP Registry Explorer</h1>
-            <p className="subtitle">Browse filtered MCP servers from the official registry</p>
+            <h1>MCP Registry</h1>
+            <p className="subtitle">Allowed MCP servers for this organization</p>
           </div>
           <a
             href="https://registry.modelcontextprotocol.io"
@@ -32,51 +39,19 @@ export default function App() {
       </header>
 
       <main className="app-main">
-        <section className="filter-section">
-          <div className="preset-tabs">
-            {PRESETS.map((preset) => (
-              <button
-                key={preset.id}
-                className={`preset-tab ${activePreset.id === preset.id && !customQuery ? 'active' : ''}`}
-                onClick={() => {
-                  setActivePreset(preset);
-                  setCustomQuery('');
-                }}
-              >
-                {preset.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="custom-filter">
-            <input
-              type="text"
-              placeholder="Custom search…"
-              value={customQuery}
-              onChange={(e) => setCustomQuery(e.target.value)}
-            />
-          </div>
-
-          <p className="filter-description">
-            {customQuery.trim() ? `Searching for: "${customQuery.trim()}"` : activePreset.description}
-          </p>
-        </section>
-
         {loading && (
-          <div className="status">
-            <span className="spinner" /> Searching registry…
-          </div>
+          <div className="status"><span className="spinner" /> Loading…</div>
         )}
 
         {error && (
           <div className="status error">
-            Error: {error} — <button onClick={refetch}>Retry</button>
+            Error: {error} — <button onClick={load}>Retry</button>
           </div>
         )}
 
         {!loading && !error && (
           <div className="results-header">
-            <span>{servers.length} server{servers.length !== 1 ? 's' : ''} found</span>
+            <span>{servers.length} allowed server{servers.length !== 1 ? 's' : ''}</span>
           </div>
         )}
 
@@ -85,10 +60,6 @@ export default function App() {
             <ServerCard key={`${entry.server.name}:${entry.server.version}`} entry={entry} />
           ))}
         </div>
-
-        {!loading && !error && servers.length === 0 && (
-          <div className="empty">No servers matched the current filter.</div>
-        )}
       </main>
     </div>
   );
