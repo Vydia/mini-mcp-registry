@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// Fetches the official Figma MCP server from the registry and writes
-// public/allowed-servers — a Copilot-compatible MCP registry endpoint.
+// Fetches the official Figma MCP server from the registry and writes:
+//   public/v0.1/servers       — Copilot org registry endpoint (base URL: https://vydia.github.io/mini-mcp-registry)
+//   public/allowed-servers    — legacy / direct access
 
 import { writeFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
@@ -16,7 +17,7 @@ async function fetchFigmaOfficial() {
   return res.json();
 }
 
-mkdirSync(OUT_DIR, { recursive: true });
+mkdirSync(join(OUT_DIR, 'v0.1'), { recursive: true });
 
 console.log('Fetching official Figma MCP server...');
 const entry = await fetchFigmaOfficial();
@@ -29,6 +30,8 @@ const payload = {
   },
 };
 
-const outPath = join(OUT_DIR, 'allowed-servers');
-writeFileSync(outPath, JSON.stringify(payload, null, 2));
+const json = JSON.stringify(payload, null, 2);
+writeFileSync(join(OUT_DIR, 'v0.1', 'servers'), json);
+console.log('✓ public/v0.1/servers written');
+writeFileSync(join(OUT_DIR, 'allowed-servers'), json);
 console.log('✓ public/allowed-servers written');
