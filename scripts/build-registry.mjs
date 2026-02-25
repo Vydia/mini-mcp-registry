@@ -31,7 +31,7 @@ const payload = {
 };
 
 const json = JSON.stringify(payload, null, 2);
-writeFileSync(join(OUT_DIR, 'v0.1', 'servers'), json);
-console.log('✓ public/v0.1/servers written');
-writeFileSync(join(OUT_DIR, 'allowed-servers'), json);
-console.log('✓ public/allowed-servers written');
+writeFileSync(join(OUT_DIR, 'v0.1', 'servers.json'), json);
+console.log('✓ public/v0.1/servers.json written');
+writeFileSync(join(OUT_DIR, 'allowed-servers.json'), json);
+console.log('✓ public/allowed-servers.json written');

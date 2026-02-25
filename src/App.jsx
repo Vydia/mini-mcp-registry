@@ -10,7 +10,7 @@ export default function App() {
   const load = () => {
     setLoading(true);
     setError(null);
-    fetch('./allowed-servers')
+    fetch('./allowed-servers.json')
       .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then((d) => setServers(d.servers ?? []))
       .catch((e) => setError(e.message))
