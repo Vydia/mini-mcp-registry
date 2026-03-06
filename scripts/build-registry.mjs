@@ -14,18 +14,19 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = join(__dirname, '..', 'public');
 
-// Add server IDs here to include them (use the IDs from github.com/mcp, e.g. 'io.github.github/github-mcp-server')
+// Add server IDs here to include them (use the IDs from github.com/mcp, e.g. 'com.figma.mcp/mcp')
 const ALLOWED_SERVERS = [
-  'io.github.github/github-mcp-server',
+  'com.figma.mcp/mcp',
 ];
 
-const GITHUB_MCP_URL = 'https://github.com/mcp.json';
+const GITHUB_MCP_BASE = 'https://github.com/mcp';
 
-async function fetchAllServers() {
-  const res = await fetch(GITHUB_MCP_URL);
-  if (!res.ok) throw new Error(`Failed to fetch ${GITHUB_MCP_URL}: ${res.status}`);
+async function fetchServer(id) {
+  const url = `${GITHUB_MCP_BASE}/${id}`;
+  const res = await fetch(url, { headers: { Accept: 'application/json' } });
+  if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
   const json = await res.json();
-  return json.payload.mcpRegistryRoute.serversData.servers;
+  return json.payload.mcpDetailsRoute.server_data;
 }
 
 function mapServer(ghServer) {
@@ -53,14 +54,11 @@ function write(filePath, data) {
 }
 
 console.log('Fetching servers from github.com/mcp...');
-const allServers = await fetchAllServers();
-const serverMap = new Map(allServers.map(s => [s.id, s]));
 const entries = [];
 
 for (const name of ALLOWED_SERVERS) {
   process.stdout.write(`  ${name}...`);
-  const ghServer = serverMap.get(name);
-  if (!ghServer) throw new Error(`Server not found in github.com/mcp: ${name}`);
+  const ghServer = await fetchServer(name);
   const entry = mapServer(ghServer);
   entries.push(entry);
 

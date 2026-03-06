@@ -1,6 +1,6 @@
 # mini-mcp-registry
 
-A lightweight, self-hosted MCP registry proxy that exposes a curated subset of the [official MCP registry](https://registry.modelcontextprotocol.io). Deployed to Vercel.
+A lightweight, self-hosted MCP registry proxy that exposes a curated subset of the [GitHub MCP registry](https://github.com/mcp). Deployed to Vercel.
 
 ## Registry URL
 
@@ -10,7 +10,7 @@ https://mini-mcp-registry.vercel.app
 
 ## Managing servers
 
-**Add a server** using its name from the [official registry](https://registry.modelcontextprotocol.io):
+**Add a server** using its ID from the [GitHub MCP registry](https://github.com/mcp):
 
 ```bash
 npm run add-server -- com.figma.mcp/mcp

@@ -28,12 +28,12 @@ export default function App() {
             <p className="subtitle">Allowed MCP servers for this organization</p>
           </div>
           <a
-            href="https://registry.modelcontextprotocol.io"
+            href="https://github.com/mcp"
             target="_blank"
             rel="noreferrer"
             className="registry-link"
           >
-            Official Registry ↗
+            GitHub Registry ↗
           </a>
         </div>
       </header>

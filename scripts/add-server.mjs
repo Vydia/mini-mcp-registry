@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Usage: node scripts/add-server.mjs <server-id>
-// Example: node scripts/add-server.mjs io.github.github/github-mcp-server
+// Example: node scripts/add-server.mjs com.figma.mcp/mcp
 //
 // Looks up the server in github.com/mcp, adds it to ALLOWED_SERVERS,
 // and runs the build so the change is ready to push.
@@ -16,20 +16,20 @@ const BUILD_SCRIPT = join(__dirname, 'build-registry.mjs');
 const name = process.argv[2];
 if (!name) {
   console.error('Usage: node scripts/add-server.mjs <server-id>');
-  console.error('Example: node scripts/add-server.mjs io.github.github/github-mcp-server');
+  console.error('Example: node scripts/add-server.mjs com.figma.mcp/mcp');
   process.exit(1);
 }
 
 // Verify the server exists in github.com/mcp
 console.log(`Looking up "${name}" in github.com/mcp...`);
-const res = await fetch('https://github.com/mcp.json');
+const res = await fetch(`https://github.com/mcp/${name}`, { headers: { Accept: 'application/json' } });
 if (!res.ok) {
-  console.error(`✗ Failed to fetch github.com/mcp: ${res.status}`);
+  console.error(`✗ Server not found: "${name}" (HTTP ${res.status})`);
+  console.error(`  Browse available servers at https://github.com/mcp`);
   process.exit(1);
 }
 const json = await res.json();
-const servers = json.payload.mcpRegistryRoute.serversData.servers;
-const data = servers.find(s => s.id === name);
+const data = json.payload.mcpDetailsRoute.server_data;
 if (!data) {
   console.error(`✗ Server not found: "${name}"`);
   console.error(`  Browse available servers at https://github.com/mcp`);

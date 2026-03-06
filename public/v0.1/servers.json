@@ -2,18 +2,18 @@
   "servers": [
     {
       "server": {
-        "name": "io.github.github/github-mcp-server",
-        "title": "GitHub",
-        "description": "Connect AI assistants to GitHub - manage repos, issues, PRs, and workflows through natural language.",
-        "version": "0.32.0",
+        "name": "com.figma.mcp/mcp",
+        "title": "Figma MCP Server",
+        "description": "The Figma MCP server brings Figma design context directly into your AI workflow.",
+        "version": "1.0.3",
         "repository": {
-          "url": "https://github.com/github/github-mcp-server",
+          "url": "https://github.com/figma/mcp-server-guide",
           "source": "github"
         }
       },
       "_meta": {
-        "updatedAt": "2026-03-06T14:50:08Z",
-        "stars": 27563
+        "updatedAt": "2026-02-27T16:49:53Z",
+        "stars": 326
       }
     }
   ],
