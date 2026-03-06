@@ -31,18 +31,16 @@ async function fetchServer(id) {
 }
 
 function mapServer(ghServer) {
+  // Use raw_data (the full official MCP schema) so fields like `remotes` and
+  // `packages` are preserved — VSCode needs these to install the server.
+  const raw = ghServer.raw_data ?? {};
   return {
     server: {
+      ...(raw.server ?? {}),
       name: ghServer.id,
-      title: ghServer.display_name,
-      description: ghServer.description ?? '',
-      version: ghServer.created_at,
-      repository: {
-        url: ghServer.repository.url,
-        source: ghServer.repository.source,
-      },
     },
     _meta: {
+      ...(raw._meta ?? {}),
       updatedAt: ghServer.updated_at,
       stars: ghServer.stargazer_count,
     },
@@ -67,7 +65,7 @@ for (const name of ALLOWED_SERVERS) {
   const serverDir = join(OUT_DIR, 'v0.1', ...name.split('/'));
   write(join(serverDir, 'versions', 'latest.json'), entry);
   write(join(serverDir, 'versions', `${entry.server.version}.json`), entry);
-  console.log(` ✓ v${entry.server.version}`);
+  console.log(` ✓ v${entry.server.version ?? '?'}`);
 }
 
 const list = {
