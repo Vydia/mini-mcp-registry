@@ -81,6 +81,29 @@ button {
   border-radius: 8px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.request-btn {
+  font-size: 0.875rem;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff !important;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+
+.request-btn:hover {
+  opacity: 0.88;
+  text-decoration: none;
+}
+
 /* Filters */
 .filter-section {
   margin-bottom: 1.5rem;

@@ -27,14 +27,24 @@ export default function App() {
             <h1>MCP Registry</h1>
             <p className="subtitle">Allowed MCP servers for this organization</p>
           </div>
-          <a
-            href="https://github.com/mcp"
-            target="_blank"
-            rel="noreferrer"
-            className="registry-link"
-          >
-            GitHub Registry ↗
-          </a>
+          <div className="header-actions">
+            <a
+              href="https://docs.google.com/forms/d/1xpjGdyvVGCUYWFrqbivF2wLWnDyXaftTM-j5uBScrbY"
+              target="_blank"
+              rel="noreferrer"
+              className="request-btn"
+            >
+              + Request a New Server
+            </a>
+            <a
+              href="https://github.com/mcp"
+              target="_blank"
+              rel="noreferrer"
+              className="registry-link"
+            >
+              GitHub Registry ↗
+            </a>
+          </div>
         </div>
       </header>
 
