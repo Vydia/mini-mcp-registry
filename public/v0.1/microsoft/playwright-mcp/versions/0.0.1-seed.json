@@ -1,0 +1,16 @@
+{
+  "server": {
+    "name": "microsoft/playwright-mcp",
+    "title": "Playwright",
+    "description": "Automate web browsers using accessibility trees for testing and data extraction.",
+    "version": "0.0.1-seed",
+    "repository": {
+      "url": "https://github.com/microsoft/playwright-mcp",
+      "source": "github"
+    }
+  },
+  "_meta": {
+    "updatedAt": "2026-03-05T02:38:40Z",
+    "stars": 28323
+  }
+}
