@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Usage: node scripts/add-server.mjs <server-name>
-// Example: node scripts/add-server.mjs io.github.someone/my-server
+// Usage: node scripts/add-server.mjs <server-id>
+// Example: node scripts/add-server.mjs io.github.github/github-mcp-server
 //
-// Looks up the server in the MCP registry, adds it to ALLOWED_SERVERS,
+// Looks up the server in github.com/mcp, adds it to ALLOWED_SERVERS,
 // and runs the build so the change is ready to push.
 
 import { readFileSync, writeFileSync } from 'fs';
@@ -15,23 +15,27 @@ const BUILD_SCRIPT = join(__dirname, 'build-registry.mjs');
 
 const name = process.argv[2];
 if (!name) {
-  console.error('Usage: node scripts/add-server.mjs <server-name>');
-  console.error('Example: node scripts/add-server.mjs io.github.someone/my-server');
+  console.error('Usage: node scripts/add-server.mjs <server-id>');
+  console.error('Example: node scripts/add-server.mjs io.github.github/github-mcp-server');
   process.exit(1);
 }
 
-// Verify the server exists in the MCP registry
-console.log(`Looking up "${name}" in the MCP registry...`);
-const encoded = encodeURIComponent(name);
-const url = `https://registry.modelcontextprotocol.io/v0.1/servers/${encoded}/versions/latest`;
-const res = await fetch(url);
+// Verify the server exists in github.com/mcp
+console.log(`Looking up "${name}" in github.com/mcp...`);
+const res = await fetch('https://github.com/mcp.json');
 if (!res.ok) {
-  console.error(`✗ Server not found: ${res.status} ${res.statusText}`);
-  console.error(`  Check https://registry.modelcontextprotocol.io for the correct name.`);
+  console.error(`✗ Failed to fetch github.com/mcp: ${res.status}`);
   process.exit(1);
 }
-const data = await res.json();
-console.log(`✓ Found: ${data.server.title ?? data.server.name} v${data.server.version}`);
+const json = await res.json();
+const servers = json.payload.mcpRegistryRoute.serversData.servers;
+const data = servers.find(s => s.id === name);
+if (!data) {
+  console.error(`✗ Server not found: "${name}"`);
+  console.error(`  Browse available servers at https://github.com/mcp`);
+  process.exit(1);
+}
+console.log(`✓ Found: ${data.display_name} v${data.created_at}`);
 
 // Add to ALLOWED_SERVERS in build-registry.mjs
 const src = readFileSync(BUILD_SCRIPT, 'utf8');

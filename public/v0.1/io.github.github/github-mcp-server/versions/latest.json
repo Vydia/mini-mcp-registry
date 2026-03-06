@@ -1,0 +1,16 @@
+{
+  "server": {
+    "name": "io.github.github/github-mcp-server",
+    "title": "GitHub",
+    "description": "Connect AI assistants to GitHub - manage repos, issues, PRs, and workflows through natural language.",
+    "version": "0.32.0",
+    "repository": {
+      "url": "https://github.com/github/github-mcp-server",
+      "source": "github"
+    }
+  },
+  "_meta": {
+    "updatedAt": "2026-03-06T14:50:08Z",
+    "stars": 27563
+  }
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Usage: node scripts/remove-server.mjs <server-name>
-// Example: node scripts/remove-server.mjs com.figma.mcp/mcp
+// Usage: node scripts/remove-server.mjs <server-id>
+// Example: node scripts/remove-server.mjs github/github-mcp-server
 
 import { readFileSync, writeFileSync } from 'fs';
 import { execSync } from 'child_process';
@@ -12,8 +12,8 @@ const BUILD_SCRIPT = join(__dirname, 'build-registry.mjs');
 
 const name = process.argv[2];
 if (!name) {
-  console.error('Usage: node scripts/remove-server.mjs <server-name>');
-  console.error('Example: node scripts/remove-server.mjs com.figma.mcp/mcp');
+  console.error('Usage: node scripts/remove-server.mjs <server-id>');
+  console.error('Example: node scripts/remove-server.mjs io.github.github/github-mcp-server');
   process.exit(1);
 }
 
