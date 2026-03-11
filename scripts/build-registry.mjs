@@ -17,6 +17,7 @@ const OUT_DIR = join(__dirname, '..', 'public');
 // Add server IDs here to include them (use the IDs from github.com/mcp, e.g. 'com.figma.mcp/mcp')
 const ALLOWED_SERVERS = [
   'microsoft/playwright-mcp',
+  'com.figma.mcp/mcp',
 ];
 
 const GITHUB_MCP_BASE = 'https://github.com/mcp';
