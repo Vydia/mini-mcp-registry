@@ -18,6 +18,7 @@ const OUT_DIR = join(__dirname, '..', 'public');
 const ALLOWED_SERVERS = [
   'microsoft/playwright-mcp',
   'com.figma.mcp/mcp',
+  'com.atlassian/atlassian-mcp-server',
 ];
 
 const GITHUB_MCP_BASE = 'https://github.com/mcp';
